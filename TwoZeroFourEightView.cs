@@ -28,6 +28,9 @@ namespace twozerofoureight
         public void Notify(Model m)
         {
             UpdateBoard(((TwoZeroFourEightModel)m).GetBoard());
+            UpdateScore(((TwoZeroFourEightModel)m).GetScore());//Declare function Getscore from model
+            UpdateStatus(((TwoZeroFourEightModel)m).Checkgameover());//Declare function Checkgameover from model
+            UpdateStatus(((TwoZeroFourEightModel)m).Checkgamewin());//Declare function Checkgamewin from model
         }
 
         private void UpdateTile(Label l, int i)
@@ -98,6 +101,58 @@ namespace twozerofoureight
         {
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
         }
+        private void UpdateScore(int score)
+        {
+            lblscore.Text = Convert.ToString(score);
+        }
+        private void UpdateStatus(bool status)//function that display gameover when get 2048 and end game
+        {
+            if (status == true)
+            {
+                label1.Text = "Game Over!!!";//display Gameover!!!
+                KeyPreview = false;
+            }
+        }
+        private void TwoZeroFourEightView_KeyDown(object sender, KeyEventArgs e)//function that use arrow and wasd to move
+        {
+            if (KeyPreview == true)
+            {
+                switch (e.KeyData)
+                {
+                    case Keys.Up:
+                    case Keys.W:
+                        controller.ActionPerformed(TwoZeroFourEightController.UP);//function move up from controller
+                        break;
+                    case Keys.Down:
+                    case Keys.S:
+                        controller.ActionPerformed(TwoZeroFourEightController.DOWN);//function move down from controller
+                        break;
+                    case Keys.Left:
+                    case Keys.A:
+                        controller.ActionPerformed(TwoZeroFourEightController.LEFT);//function move left from controller
+                        break;
+                    case Keys.Right:
+                    case Keys.D:
+                        controller.ActionPerformed(TwoZeroFourEightController.RIGHT);//function move right from controller
+                        break;
+                }
+            }
+        }
+        private void btn_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)//function that can use arrow to move
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Left:
+                case Keys.Right:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+                    }
     }
 }
