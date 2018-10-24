@@ -211,7 +211,7 @@ namespace twozerofoureight
             {
                 foreach (int j in range)
                 {
-                    if (board[i, j] == 2048)
+                    if (board[i, j] == 2048) 
                     {
                         check = true;
                     }
